@@ -315,14 +315,14 @@ Unload(C4, P2, SFO)
 
 ```
 
-##Non-heuristic Search
+## Non-heuristic Search
 As demonstrated in the result, **breadth first search** always return optimal result. This is because BFS will check all nodes at each depth incrementally. Therefore, the first node that meets the goal is necessarily optimal. However, this is exhaustive and brute force. **Depth first search**, on the other hand, terminates much faster, but produces non-optimal result (e.g. path length of 392 vs. optimal path length of 12). This is understandable, as it simply keep trying various action until the goal is met. While fast, the resulting plan is almost useless. For completeness, **tree search** result is included here. Tree search is not effective in these problems as there might be loops in the search path so it might never terminate, also, duplicated states will be searched as visited nodes are not recorded. **Greedy best first graph search** looks to be a pretty good compromise, it achieves optimal result in problem 1 and problem 2 and achieves a reasonable result in problem 3 (path length: 26) which is slightly worse than optimal (12) but a lot better than DFS (path length: 392).
 
 
-##Heuristic Search using A*
+## Heuristic Search using A*
 Both yield optimal result. Also, it is worth pointing out that `ignore preconditions` is faster than BFS, therefore it would be good search strategy when optimal result is necessary. Comparing `ignore preconditions` with `level-sum` showed some interesting facts. The `level-sum` heuristic expands a lot less nodes but takes much longer time. This is because every time the `level-sum` heuristic function is evaluated, it needs to create a new Planning Graph and compute the heuristic value. This means that, while the `level-sum` heuristic explores fewer nodes, there are overheads such as having to recreate objects every time at different states.
 
-##Conclusion
+## Conclusion
 The best overall search strategy should be used is **A* with the "ignore preconditions" heuristic**. It is guaranteed to provide optimal plan[^Russell2010], and terminates faster than BFS. This is more evident when the search space is larger like in problem 3, where the heuristic search is 10 times faster than non-heuristic search. Simple heuristic search expands less nodes than BFS, and there isn't too much computational overhead unlike planning graph level sum heuristic.
 
 
@@ -367,7 +367,12 @@ Partial-order planning dominated the research space for a long time until planni
 OBDD's is a different planning system with its roots from hardware design. Its usage are in dynamic control systems where model checker has additional information based on the specific problem domain. 
 
 [^Nau1999]: D. S. Nau, Y. Cao, A. Lotem, and H. Muoz-Avila. SHOP: Simple hierarchical ordered planner. Proceedings of the International Joint Conference on Artificial Intelligence (IJCAI), pp. 968-973. Morgan Kaufmann Publishers, Jul 31-August 6 1999
+
 [^Penberthy1992]: J.S. Penberthy and D. Weld "UCPOP: A Sound, Complete, Partial-Order Planner for ADL," Proceedings of KR-92, 103-114, Cambridge, MA, October 1992
+
 [^bryce2007]: Daniel Bryce and Subbarao Kambhampati. (2007) Tutorial on Planning Graph–Based Reachability Heuristics. AI Magazine Spring 2007
+
 [^Blum1997]: A. Blum and M. Furst, "Fast Planning Through Planning Graph Analysis", Artificial Intelligence, 90:281--300 (1997)
+
 [^Bryant1986]: Randal E. Bryant. Graph-Based Algorithms for Boolean Function Manipulation. IEEE Transactions on Computers, Vol. C-35, No. 8, August, 1986, pp. 677-691.
+
